@@ -19,7 +19,12 @@ class BookCreate extends React.Component {
     const title = this.title.value; 
     const message = this.message.value; 
     const imageFile = this.imageFile.files[0];
-    const category = this.category.value;  
+    const category = this.category.value; 
+    const date = this.date.value; 
+    const time = this.time.value; 
+    
+    const dateTime = date + " " + time; 
+    const dateInMilli = Date.parse(dateTime);
 
     var d = new Date(); 
     var id = Date.parse(d).toString();
@@ -55,7 +60,10 @@ class BookCreate extends React.Component {
             title: title, 
             message: message, 
             imageUrl: url, 
-            category: category
+            category: category,
+            date: date, 
+            time: time, 
+            dateInMilli: dateInMilli
           })
           .then(() => {
             MySwal.fire({
@@ -134,6 +142,15 @@ class BookCreate extends React.Component {
               name="date"
               className="form-control"
               ref={input => this.date = input}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="time">Date:</label>
+            <input 
+              type="time"
+              name="time"
+              className="form-control"
+              ref={input => this.time = input}
             />
           </div>
           <button type="submit" className="btn btn-info">Add Book</button>
